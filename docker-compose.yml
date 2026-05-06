@@ -1,0 +1,68 @@
+services:
+  sqlserver:
+    image: mcr.microsoft.com/mssql/server:2022-latest
+    environment:
+      ACCEPT_EULA: "Y"
+      MSSQL_PID: Express
+      MSSQL_SA_PASSWORD: "${SA_PASSWORD}"
+    volumes:
+      - sqlserver_data:/var/opt/mssql
+    networks:
+      - internal
+    healthcheck:
+      test: ["CMD-SHELL", "/opt/mssql-tools18/bin/sqlcmd -S localhost -U sa -P \"$$MSSQL_SA_PASSWORD\" -Q \"SELECT 1\" -C -b -o /dev/null"]
+      interval: 15s
+      timeout: 10s
+      retries: 10
+      start_period: 45s
+
+  backend:
+    build:
+      context: ./backend/BasicWebTemplate.API/BasicWebTemplate.API
+      dockerfile: Dockerfile
+    environment:
+      ASPNETCORE_ENVIRONMENT: Production
+      ASPNETCORE_URLS: "http://+:8080"
+      ConnectionStrings__DefaultConnection: "Server=sqlserver,1433;Database=${DB_NAME:-AppTemplateDb};User Id=sa;Password=${SA_PASSWORD};TrustServerCertificate=True;Encrypt=False;"
+      Cors__AllowedOrigins__0: "${FRONTEND_ORIGIN:-http://localhost}"
+      Cors__AllowedOrigins__1: "${LOCAL_FRONTEND_ORIGIN:-http://localhost:3000}"
+    networks:
+      - internal
+    depends_on:
+      sqlserver:
+        condition: service_healthy
+    restart: unless-stopped
+
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+      args:
+        NEXT_PUBLIC_API_URL: ${NEXT_PUBLIC_API_URL:-http://localhost/api}
+    networks:
+      - internal
+    depends_on:
+      - backend
+    restart: unless-stopped
+
+  nginx:
+    image: nginx:alpine
+    ports:
+      - "${NGINX_HTTP_PORT:-80}:80"
+      - "${NGINX_HTTPS_PORT:-443}:443"
+    volumes:
+      - ./nginx/nginx.conf:/etc/nginx/conf.d/default.conf:ro
+      - ${LETSENCRYPT_PATH:-./nginx/letsencrypt}:/etc/letsencrypt:ro
+    networks:
+      - internal
+    depends_on:
+      - frontend
+      - backend
+    restart: unless-stopped
+
+networks:
+  internal:
+    driver: bridge
+
+volumes:
+  sqlserver_data:

@@ -1,0 +1,6 @@
+@BasicWebTemplate.API_HostAddress = http://localhost:5094
+
+GET {{BasicWebTemplate.API_HostAddress}}/api/database/status
+Accept: application/json
+
+###

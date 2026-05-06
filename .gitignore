@@ -1,0 +1,279 @@
+# =============================================================================
+# .NET / Visual Studio
+# =============================================================================
+
+# Build output
+bin/
+obj/
+out/
+publish/
+
+# Visual Studio user-specific files
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+.vs/
+
+# Visual Studio Code Analysis
+*.AnalysisLog.xml
+
+# NuGet package restore
+*.nuget.props
+*.nuget.targets
+packages/
+!**/packages/build/
+nuget.config.user
+
+# MSBuild generated files
+project.lock.json
+project.fragment.lock.json
+artifacts/
+
+# Roslyn test infra
+*.xlf
+
+# =============================================================================
+# ASP.NET Core / Environment & Secrets  (KRİTİK - asla commit etme)
+# =============================================================================
+
+# Environment dosyaları
+.env
+.env.local
+.env.*.local
+.env.production
+.env.staging
+.env.development.local
+.env.test.local
+
+# ASP.NET Core secrets
+appsettings.Production.json
+appsettings.Staging.json
+appsettings.Local.json
+appsettings.*.local.json
+secrets.json
+
+# Visual Studio User Secrets (local profile)
+**/Properties/launchSettings.Local.json
+
+# =============================================================================
+# Next.js / Node.js
+# =============================================================================
+
+# Dependencies
+node_modules/
+.pnp
+.pnp.js
+
+# Next.js build artifacts
+.next/
+
+# Vercel deployment
+.vercel/
+
+# Next.js cache
+.swc/
+
+# Netlify
+.netlify/
+
+# npm / yarn / pnpm logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+# npm optional cache
+.npm
+.eslintcache
+.stylelintcache
+
+# Parcel cache
+.parcel-cache
+
+# Storybook build
+storybook-static/
+
+# TypeScript build info
+*.tsbuildinfo
+
+# NOT: package-lock.json, yarn.lock ve next-env.d.ts commit EDİLMELİ
+
+# =============================================================================
+# SSL Sertifikaları ve SSH Anahtarları
+# =============================================================================
+
+# SSL/TLS sertifikası ve anahtar dosyaları
+*.pem
+*.key
+*.crt
+*.cer
+*.der
+*.pfx
+*.p12
+*.p7b
+*.p7r
+
+# Let's Encrypt
+letsencrypt/
+nginx/letsencrypt/
+certbot/
+certificates/
+certs/
+
+# SSH anahtarları
+id_rsa
+id_rsa.pub
+id_ed25519
+id_ed25519.pub
+*.ppk
+
+# =============================================================================
+# Docker
+# =============================================================================
+
+# Docker Compose override (local overrides commit edilmez)
+docker-compose.override.yml
+docker-compose.local.yml
+docker-compose.*.local.yml
+
+# Docker volume backup ve data
+docker-data/
+volumes/
+
+# NOT: docker-compose.yml ve Dockerfile commit EDİLMELİ
+
+# =============================================================================
+# SQL Server
+# =============================================================================
+
+# Veritabanı dosyaları
+*.mdf
+*.ldf
+*.ndf
+
+# Backup dosyaları (spesifik klasörler)
+backups/
+db-dumps/
+*.bacpac
+*.bcp
+*.sql.gz
+
+# SQL Server log
+*.sqllog
+
+# SSDT publish profiles (genellikle local'e özgüdür)
+*.publish.xml
+
+# =============================================================================
+# Test ve Coverage
+# =============================================================================
+
+# .NET test sonuçları
+TestResults/
+*.trx
+*.coverage
+*.coveragexml
+
+# JavaScript/Node test coverage
+coverage/
+.nyc_output/
+lcov.info
+*.lcov
+
+# =============================================================================
+# Log & Temporary Dosyalar
+# =============================================================================
+
+# Log dosyaları
+*.log
+logs/
+log/
+
+# Temporary klasörler
+tmp/
+temp/
+.temp/
+.tmp/
+
+# Cache
+*.cache
+.cache/
+
+# Crash reports
+crash-*.log
+
+# =============================================================================
+# IDE / Editor (VS Code)
+# =============================================================================
+
+# VS Code workspace-specific ayarlar (kişisel, paylaşılmaz)
+.vscode/*
+
+# HARIÇ: paylaşılabilir VS Code dosyaları
+!.vscode/settings.json
+!.vscode/extensions.json
+!.vscode/tasks.json
+!.vscode/launch.json
+
+# JetBrains IDE'leri (Rider, WebStorm, vb.)
+.idea/
+*.iml
+*.iws
+*.ipr
+.idea_modules/
+
+# Cursor (AI editor)
+.cursor/
+
+# Local assistant settings
+.claude/
+
+# Vim/Emacs swap dosyaları
+*.swp
+*.swo
+*~
+\#*\#
+.\#*
+
+# Sublime Text
+*.sublime-project
+*.sublime-workspace
+
+# =============================================================================
+# İşletim Sistemi
+# =============================================================================
+
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+._*
+.Spotlight-V100
+.Trashes
+
+# Windows
+Thumbs.db
+Thumbs.db:encryptable
+ehthumbs.db
+ehthumbs_vista.db
+desktop.ini
+$RECYCLE.BIN/
+*.lnk
+
+# Linux
+.Trash-*
+.fuse_hidden*
+.directory
+.nfs*
+
+# =============================================================================
+# Project Specific
+# =============================================================================
+
+# Buraya projeye özgü dosyaları ekle:
+
+# Örnek:
+# frontend/public/uploads/   (user-uploaded content)
+# backend/BasicWebTemplate.API/wwwroot/uploads/
