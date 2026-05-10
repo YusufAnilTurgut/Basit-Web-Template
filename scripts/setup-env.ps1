@@ -40,6 +40,7 @@ if ($Mode -eq "prod") {
     $frontendOriginDefault = if ($httpsPort -eq "443") { "https://$primaryDomain" } else { "https://$primaryDomain`:$httpsPort" }
     $apiUrlDefault = "$frontendOriginDefault/api"
     $letsencryptPath = Read-Value "Let's Encrypt host path" "/etc/letsencrypt"
+    $nginxConfFile = "./nginx/nginx.conf"
     $sslCertificate = Read-Value "SSL certificate path inside nginx container" "/etc/letsencrypt/live/$primaryDomain/fullchain.pem"
     $sslCertificateKey = Read-Value "SSL certificate key path inside nginx container" "/etc/letsencrypt/live/$primaryDomain/privkey.pem"
 
@@ -50,6 +51,7 @@ if ($Mode -eq "prod") {
     $frontendOriginDefault = if ($httpPort -eq "80") { "http://localhost" } else { "http://localhost`:$httpPort" }
     $apiUrlDefault = "$frontendOriginDefault/api"
     $letsencryptPath = "./nginx/letsencrypt"
+    $nginxConfFile = "./nginx/nginx.local.conf"
 
     $templatePath = Join-Path $root "nginx/nginx.local.conf"
     $nginxConfig = Get-Content -LiteralPath $templatePath -Raw
@@ -73,6 +75,7 @@ $envLines = @(
     "LOCAL_FRONTEND_ORIGIN=$localFrontendOrigin",
     "NGINX_HTTP_PORT=$httpPort",
     "NGINX_HTTPS_PORT=$httpsPort",
+    "NGINX_CONF_FILE=$nginxConfFile",
     "LETSENCRYPT_PATH=$letsencryptPath"
 )
 

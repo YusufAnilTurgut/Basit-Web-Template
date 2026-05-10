@@ -50,7 +50,7 @@ services:
     ports:
       - "${NGINX_HTTP_PORT:-8080}:80"
     volumes:
-      - ./nginx/nginx.prod.conf:/etc/nginx/conf.d/default.conf:ro
+      - "${NGINX_CONF_FILE:-./nginx/nginx.local.conf}:/etc/nginx/conf.d/default.conf:ro"
     networks:
       - internal
     depends_on:

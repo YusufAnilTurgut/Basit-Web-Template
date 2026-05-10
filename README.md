@@ -75,6 +75,7 @@ FRONTEND_ORIGIN=http://localhost
 LOCAL_FRONTEND_ORIGIN=http://localhost:3000
 NGINX_HTTP_PORT=80
 NGINX_HTTPS_PORT=443
+NGINX_CONF_FILE=./nginx/nginx.local.conf
 LETSENCRYPT_PATH=./nginx/letsencrypt
 ```
 
@@ -83,6 +84,7 @@ Production sunucuda genelde:
 ```env
 NEXT_PUBLIC_API_URL=https://example.com/api
 FRONTEND_ORIGIN=https://example.com
+NGINX_CONF_FILE=./nginx/nginx.conf
 LETSENCRYPT_PATH=/etc/letsencrypt
 ```
 
@@ -150,6 +152,7 @@ docker-compose.yml
 ## Notlar
 
 - Domain ve host portlari koda gomulu degil; `.env` ve setup script'i ile verilir.
+- Local Docker calistirmada `NGINX_CONF_FILE=./nginx/nginx.local.conf`, production'da `NGINX_CONF_FILE=./nginx/nginx.conf` kullanilir.
 - Backend production'da Nginx arkasinda HTTP 8080 dinler.
 - CORS origin'leri `Cors__AllowedOrigins__0` ve `Cors__AllowedOrigins__1` env degerlerinden gelir.
 - Backend ilk acilista configured SQL database yoksa `EnsureCreated` ile olusturmayi dener.
